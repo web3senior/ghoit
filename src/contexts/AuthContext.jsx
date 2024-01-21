@@ -84,8 +84,7 @@ export function AuthProvider({ children }) {
       setLoading(false)
       if (wallet) {
         setWallet(wallet)
-        if (location.pathname ==='/')  navigate('/usr/dashboard')
-
+        if (location.pathname === '/') navigate('/usr/dashboard')
       } else {
         navigate('/home')
       }
@@ -100,7 +99,7 @@ export function AuthProvider({ children }) {
     logout,
   }
 
-  if (!wallet) return <>Loading... </> //  && location.pathname !=='/home'
+  if (!wallet && location.pathname.includes(['/home','/aave'])) return <>Loading... </> //
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
