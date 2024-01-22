@@ -25,13 +25,8 @@ let link = [
   },
   {
     name: 'Borrow',
-    icon: 'target',
-    path: 'borrow',
-  },
-  {
-    name: 'Repay',
     icon: 'attach_money',
-    path: 'repay',
+    path: 'borrow',
   },
 ]
 
@@ -115,7 +110,7 @@ export default function Root() {
                     link.map((item, i) => (
                       <li key={i} className="animate blur">
                         <NavLink to={`${item.path}`} className={({ isActive, isPending }) => (isPending ? styles.pending : isActive ? styles.active : null)}>
-                        <MaterialIcon name={item.icon}/>
+                          <MaterialIcon name={item.icon} />
                           <span>{item.name}</span>
                         </NavLink>
                       </li>
@@ -123,7 +118,7 @@ export default function Root() {
                 </ul>
 
                 <NavLink to={`/`} className={({ isActive, isPending }) => (isPending ? styles.pending : isActive ? styles.active : null)} onClick={() => localStorage.clear()}>
-                <MaterialIcon name={`Logout`}/>
+                  <MaterialIcon name={`Logout`} />
                   <span>Disconnect</span>
                 </NavLink>
               </nav>

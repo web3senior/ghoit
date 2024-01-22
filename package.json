@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@rollup/plugin-inject": "^5.0.5",
     "animate.css": "^4.1.1",
     "office-ui-fabric-core": "^11.1.0",
     "react": "^18.2.0",
@@ -17,6 +19,7 @@
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.21.2",
     "viem": "^2.2.0",
+    "vite-plugin-node-stdlib-browser": "^0.2.1",
     "web3": "^4.4.0"
   },
   "devDependencies": {

@@ -99,7 +99,7 @@ export function AuthProvider({ children }) {
     logout,
   }
 
-  if (!wallet) return <>Loading... </> // && location.pathname.includes(['/home','/aave']
+  if (!wallet && location.pathname.includes(['/home','/aave'])) return <>Loading... </> // && location.pathname.includes(['/home','/aave']
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
