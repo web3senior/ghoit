@@ -1,6 +1,8 @@
 # GHOIT
 The gateway to a world of secure and transparent transactions, connect, create, and make payment.
 
+With GHO all platforms can create invoice and redirect users to GHOIT payment gateway to pay it. The website could be a shopping platform or a donation platform.
+
 # Demo
 https://ghoit.xyz
 
