@@ -82,7 +82,7 @@ export default function Root() {
                   </ul>
                 </nav>
 
-                {auth.wallet ? `${auth.wallet.slice(0, 4)}...${auth.wallet.slice(38)}` : <button>Connect</button>}
+                {auth.wallet ? `${auth.wallet.slice(0, 4)}...${auth.wallet.slice(38)}` : <button style={{border:'1px solid #e3e3e3', cursor:'pointer'}} onClick={()=>auth.connect()}>Connect</button>}
               </header>
             </>
           )}

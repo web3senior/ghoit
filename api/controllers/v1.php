@@ -333,11 +333,10 @@ class V1 extends Controller
 
 
 
-    function car()
+    function dashboard()
     {
-        $table = ['car', 'id'];
         $this->request_method("GET");
-        $data = $this->model->car();
+        $data = $this->model->dashboard($_GET['wallet_addr']);
         if (!empty($data) && is_array($data)) {
             (new Httpresponse)->set(200);
             echo json_encode($data);
@@ -489,20 +488,6 @@ class V1 extends Controller
         }
     }
 
-    function dashboard()
-    {
-        $this->authorization();
-        $this->request_method("GET");
-
-        $data = $this->model->dashboard();
-        if (!empty($data) && is_array($data)) {
-            (new Httpresponse)->set(200);
-            echo json_encode($data);
-        } else {
-            $this->_error = "Not found any record!";
-            $this->Error();
-        }
-    }
 
 
 

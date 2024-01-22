@@ -27,6 +27,22 @@ class V1_Model extends Model
         }
     }
 
+    function dashboard($addr)
+    {
+        return $data = [
+            'merchant' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `merchant` WHERE `wallet_addr`=:wallet_addr;', [':wallet_addr' => $addr])[0]['total'],
+            'invoice' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `invoice` i INNER JOIN `merchant` m ON m.id = i.merchant_id  WHERE m.`wallet_addr`=:wallet_addr;', [':wallet_addr' => $addr])[0]['total'],
+            'paid_invoice' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `invoice` i INNER JOIN `merchant` m ON m.id = i.merchant_id   WHERE m.`wallet_addr`=:wallet_addr AND i.`status`=:status;', [':wallet_addr' => $addr, ':status' => 1])[0]['total'],
+            'pending_invoice' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `invoice` i INNER JOIN `merchant` m ON m.id = i.merchant_id   WHERE m.`wallet_addr`=:wallet_addr AND i.`status`=:status;', [':wallet_addr' => $addr, ':status' => 0])[0]['total'],
+            // 'decline' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 4])[0]['total'],
+            // 'suspend' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 5])[0]['total'],
+            // 'request_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request`',)[0]['total'],
+            // 'proceedings_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_proceedings`',)[0]['total'],
+            // 'today_request_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` where `dt` LIKE "%' . jdate("Y-m-d", time(), '', '', 'en') . '%"')[0]['total'],
+            // 'commission_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_commission`',)[0]['total'],
+        ];
+    }
+
 
     function merchant($addr)
     {
@@ -37,9 +53,7 @@ class V1_Model extends Model
 
     function invoice($addr)
     {
-        return $this->db->select("
-             select * from merchant m right join invoice i on m.id = i.merchant_id where m.`wallet_addr`=:wallet_addr order by m.`id` desc
-              ", [':wallet_addr' => $addr]);
+        return $this->db->select("select * from merchant m right join invoice i on m.id = i.merchant_id  order by m.`id` desc");
     }
 
 
@@ -49,22 +63,6 @@ class V1_Model extends Model
              select * from merchant m right join invoice i on m.id = i.merchant_id where m.`wallet_addr`=:wallet_addr and 
              i.id=:invoice_id order by m.`id` desc
               ", [':wallet_addr' => $addr, ':invoice_id' => $invoice_id]);
-    }
-
-    public function dashboard()
-    {
-        return $data = [
-            'request' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 0])[0]['total'],
-            'engineer' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 1])[0]['total'],
-            'commission' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 2])[0]['total'],
-            'accept' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 3])[0]['total'],
-            'decline' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 4])[0]['total'],
-            'suspend' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` WHERE `status`=:status;', [':status' => 5])[0]['total'],
-            'request_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request`',)[0]['total'],
-            'proceedings_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_proceedings`',)[0]['total'],
-            'today_request_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_request` where `dt` LIKE "%' . jdate("Y-m-d", time(), '', '', 'en') . '%"')[0]['total'],
-            'commission_total' =>  $this->db->select('SELECT COUNT(*) as `total` FROM `p_commission`',)[0]['total'],
-        ];
     }
 
     function request($tbl, $data, $start = 0, $count = 10)

@@ -1,5 +1,20 @@
 /**
- * Get Tour
+ * Get dashboard
+ * @returns
+ */
+export async function getDashboard(wallet_addr) {
+  let requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+  }
+
+  const response = await fetch(`${import.meta.env.VITE_API_URL}dashboard?wallet_addr=${wallet_addr}`, requestOptions)
+  if (!response.ok) throw new Response('Failed to get data', { status: 500 })
+  return response.json()
+}
+
+/**
+ *
  * @returns
  */
 export async function getMerchant(wallet_addr) {

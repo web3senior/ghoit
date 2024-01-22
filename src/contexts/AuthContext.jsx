@@ -78,6 +78,7 @@ export function AuthProvider({ children }) {
   function resetPassword() {}
 
   useEffect(() => {
+    console.log(location.pathname)
     isWalletConnected().then((wallet) => {
       console.log(wallet)
       setIsConnected(true)
@@ -86,7 +87,7 @@ export function AuthProvider({ children }) {
         setWallet(wallet)
         if (location.pathname === '/') navigate('/usr/dashboard')
       } else {
-        navigate('/home')
+        if (location.pathname.search(/usr/g) > -1) navigate('/home')
       }
     })
   }, [])
@@ -99,7 +100,7 @@ export function AuthProvider({ children }) {
     logout,
   }
 
-  if (!wallet && location.pathname.includes(['/home','/aave'])) return <>Loading... </> // && location.pathname.includes(['/home','/aave']
+  if (!wallet && (location.pathname.search(/usr/g) > -1 || location.pathname.search(/invoice/g) > -1)) return <>Loading... </>
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

@@ -129,6 +129,9 @@ const MerchantItem = ({ item }) => {
     <div className={`card`}>
       <div className={`card__body`}>
         <ul className={`d-flex flex-column ${styles.merchantItem}`}>
+        <li>
+            id: <span>#{item.id}</span>
+          </li>
           <li>
             name: <span>{item.name}</span>
           </li>

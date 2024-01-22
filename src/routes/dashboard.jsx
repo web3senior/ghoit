@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect } from 'react'
 import { useLoaderData, defer, Await, Form, useActionData } from 'react-router-dom'
-import { getProfile, getPool } from '../util/api'
+import { getDashboard } from '../util/api'
 import { Title } from './helper/DocumentTitle'
 import LoadingSpinner from './components/LoadingSpinner'
 import { useAuth, web3 } from './../contexts/AuthContext'
@@ -17,7 +17,7 @@ export default function Setting({ title }) {
   const [loaderData, setLoaderData] = useState(useLoaderData())
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [data, setData] = useState([])
+  const [data, setData] = useState()
   const [profile, setProfile] = useState([])
   const [totalProfile, setTotalProfile] = useState()
   const [pool, setPool] = useState([])
@@ -27,6 +27,10 @@ export default function Setting({ title }) {
 
 
   useEffect(() => {
+    getDashboard(auth.wallet).then(result =>{
+      console.log(result)
+      setData(result)
+    })
   }, [])
 
   return (
@@ -39,7 +43,7 @@ export default function Setting({ title }) {
             <label htmlFor="">Merchant</label>
             <div className="card">
               <div className="card__body">
-                <p>3</p>
+              <p>{data  && data.merchant}</p>
               </div>
             </div>
           </div>
@@ -48,7 +52,7 @@ export default function Setting({ title }) {
             <label htmlFor="">Total Invoice</label>
             <div className="card">
               <div className="card__body">
-                <p>5</p>
+                <p>{data  && data.invoice}</p>
               </div>
             </div>
           </div>
@@ -57,7 +61,7 @@ export default function Setting({ title }) {
             <label htmlFor="">Paid Invoice</label>
             <div className="card">
               <div className="card__body">
-                <p className='text-success'>2</p>
+                <p className='text-success'>{data  && data.paid_invoice}</p>
               </div>
             </div>
           </div>
@@ -66,7 +70,7 @@ export default function Setting({ title }) {
             <label htmlFor="">Pending Invoice</label>
             <div className="card">
               <div className="card__body">
-                <p className='text-danger'>3</p>
+                <p className='text-danger'>{data  && data.pending_invoice}</p>
               </div>
             </div>
           </div>
