@@ -5,7 +5,7 @@ The gateway to a world of secure and transparent transactions, connect, create, 
 https://ghoit.xyz
 
 # Workflow
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FxyBkSo3vK8s3oH1d7mS9Su%2FUntitled%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DdtVOvwd2BCtV9B4i-1" allowfullscreen></iframe>
+<img src="chart.png">
 
 # Aave
 Aave is a decentralized non-custodial liquidity protocol where users can participate as depositors or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized (perpetually) or undercollateralized (one-block liquidity) fashion. This Portal links to the key resources on Aave to understand the fundamentals of the Protocol. Please join the discussion on Aave community Discord server; our team and members of the community look forward to helping you build on top of Aave.
