@@ -47,22 +47,24 @@ class V1_Model extends Model
     function merchant($addr)
     {
         return $this->db->select("
-             select * from merchant where `wallet_addr`=:wallet_addr order by `id` desc
-              ", [':wallet_addr' => $addr]);
+             select * from merchant order by `id` desc
+              ");
     }
 
     function invoice($addr)
     {
-        return $this->db->select("select * from merchant m right join invoice i on m.id = i.merchant_id  order by m.`id` desc");
+        return $this->db->select("
+             select * from merchant m right join invoice i on m.id = i.merchant_id  order by m.`id` desc
+              ");
     }
 
 
     function invoiceDetail($addr, $invoice_id)
     {
         return $this->db->select("
-             select * from merchant m right join invoice i on m.id = i.merchant_id where m.`wallet_addr`=:wallet_addr and 
+             select * from merchant m right join invoice i on m.id = i.merchant_id where   
              i.id=:invoice_id order by m.`id` desc
-              ", [':wallet_addr' => $addr, ':invoice_id' => $invoice_id]);
+              ", [':invoice_id' => $invoice_id]);
     }
 
     function request($tbl, $data, $start = 0, $count = 10)
